@@ -1,5 +1,17 @@
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import { useArticles } from "../context/ArticlesContext";
+
 function AdminPage() {
-  // Check if a user is an admin and return all users' saved articles if they are. Redirect them to home if not.
+  const { isAdmin } = useAuth();
+  const { getAllUserArticles } = useArticles();
+
+  // Redirect non-admin users
+  if (!isAdmin()) {
+    return <Navigate to="/" replace />;
+  }
+
+  const allUserArticles = getAllUserArticles();
 
   return (
     <div>
@@ -54,7 +66,12 @@ function AdminPage() {
                       }}
                     >
                       <h4 style={{ margin: '0 0 8px 0', fontSize: '0.95rem' }}>
-                        <a href={article.url} target="_blank" rel="noopener noreferrer" style={{ color: '#1976d2', textDecoration: 'none' }}>
+                        <a 
+                          href={article.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          style={{ color: '#1976d2', textDecoration: 'none' }}
+                        >
                           {article.title}
                         </a>
                       </h4>

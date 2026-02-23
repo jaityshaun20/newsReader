@@ -24,7 +24,7 @@ function Login() {
     // Mock authentication - accepts any username/password
     // In a real app, this would validate against a backend
     try {
-      login(username, password, selectedRole);
+      login(username, selectedRole);
       // Redirect to saved articles after successful login
       navigate('/saved');
     } catch (err) {
@@ -71,7 +71,7 @@ function Login() {
               onChange={(e) => setSelectedRole(e.target.value)}
             >
               <option value="regular">Regular User</option>
-              <option value="premium">Premium User</option>
+              <option value="admin">Admin User</option>
             </select>
           </div>
 
